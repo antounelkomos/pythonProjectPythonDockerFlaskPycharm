@@ -106,7 +106,7 @@ def api_edit(city_id) -> str:
                  content['fldCountry'], content['fldAbbreviation'],
                  content['fldCapitalStatus'], content['fldPopulation'],city_id)
     sql_update_query = """UPDATE tblCitiesImport t SET t.fldName = %s, t.fldLat = %s, t.fldLong = %s, t.fldCountry = 
-        %s, t.fldAbbreviation = %s, t.fldCapitalStatus = %s, t.fldPopulation = %s WHERE t.id = %s """
+        %s, t.fldAbbreviation = %s, t.fldCapitalStatus = %s, t.fldPopulation = %s WHERE 'id' = %s """
     cursor.execute(sql_update_query, inputData)
     mysql.get_db().commit()
     resp = Response(status=200, mimetype='application/json')
@@ -130,7 +130,7 @@ def api_add() -> str:
 @app.route('/api/v1/cities/<int:city_id>', methods=['DELETE'])
 def api_delete(city_id) -> str:
     cursor = mysql.get_db().cursor()
-    sql_delete_query = """DELETE FROM tblCitiesImport WHERE id = %s """
+    sql_delete_query = """DELETE FROM tblCitiesImport WHERE 'id' = %s """
     cursor.execute(sql_delete_query, city_id)
     mysql.get_db().commit()
     resp = Response(status=200, mimetype='application/json')
